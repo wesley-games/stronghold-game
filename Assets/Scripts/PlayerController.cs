@@ -5,16 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private Rigidbody rb;
+    public float speed;
+    private Rigidbody body;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+
+        body.MovePosition(body.position + new Vector3(horizontal, 0, vertical));
     }
 }
